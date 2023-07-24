@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities{
+    .open-menu{
+        height: 220px;
+        opacity: 1;
+        display: block;
+    }
+    .transition-action{
+        @apply transition-all ease-out duration-300;
+    }
+    .move-lines :nth-child(1){
+        transform: rotateZ(45deg) translate(9px, 8px);
+    }
+    .move-lines :nth-child(2){
+        opacity: 0;
+    }
+    .move-lines :nth-child(3){
+        transform: rotateZ(-45deg) translate(8px, -8px);
+    }
+}

@@ -6,7 +6,7 @@
             </div>
             <div
                 class="
-                    p-3 hidden
+                    p-3 hidden w-full
                     md:bg-transparent md:flex-row md:w-full md:h-full md:block
                 "
                 ref="menu"
@@ -46,10 +46,10 @@
                 <i class="icon-cloud-moon-inv text-sky-500 dark:text-white text-3xl" @click="changeModeDark" />
             </div>
             </div>
-            <div class="block md:hidden w-[40px] h-[30px] my-2" id="openMenu" @click="hiddenMenu">
-                <span class="block bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
-                <span class="block bg-sky-600 dark:bg-white w-full h-2 rounded-full my-1" />
-                <span class="block bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
+            <div class="block md:hidden w-[40px] h-[30px] my-2" ref="openMenu" @click="hiddenMenu">
+                <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
+                <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full my-1" />
+                <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
             </div>
         </nav>
     </header>
@@ -86,9 +86,16 @@ function changeModeDark(){
 }
 
 function hiddenMenu(){
-    menu.value.classList.toggle('openMenu')
+    menu.value.classList.toggle('open-menu')
+    openMenu.value.classList.toggle('move-lines')
 }
 
+window.onresize = (param) => {
+    if(param.target.innerWidth > 768){
+        menu.value.classList.remove('open-menu')
+        openMenu.value.classList.remove('move-lines')
+    }
+}
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (value) => {
     if(value.matches){
@@ -102,9 +109,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (va
 </script>
 
 <style scoped>
-.openMenu{
-    @apply h-[220px] opacity-1 block;
-}
 
 @media ( min-width: 768px ) {
     .openMenu{
