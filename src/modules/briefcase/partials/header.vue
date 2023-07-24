@@ -46,7 +46,7 @@
                 <i class="icon-cloud-moon-inv text-sky-500 dark:text-white text-3xl" @click="changeModeDark" />
             </div>
             </div>
-            <div class="block md:hidden w-[40px] h-[30px] my-2" ref="openMenu" @click="hiddenMenu">
+            <div class="block md:hidden min-w-[40px] h-[30px] my-2 cursor-pointer" ref="openMenu" @click="hiddenMenu">
                 <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
                 <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full my-1" />
                 <span class="block transition-action origin-center bg-sky-600 dark:bg-white w-full h-2 rounded-full" />
