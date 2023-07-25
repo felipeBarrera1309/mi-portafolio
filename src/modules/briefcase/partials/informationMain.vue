@@ -60,7 +60,7 @@
         </div>
         <div
             class="w-64 h-80 bg-cover m-auto
-                bg-[url('/hom/gbp/Documents/cursos-youtube/tailwind-practice/mi-portafolio/public/generals/photo-felipe.jpg')]
+                bg-[url('/home/felipe/Documentos/cursos-youtube/mi-portafolio/public/generals/photo-felipe.jpg')]
                 rounded-lg lg:w-full lg:h-full lg:bg-center lg:bg-no-repeat lg:bg-[length:417px_440px]
             "
         />
@@ -89,7 +89,7 @@
                 "
                 :class="buttonSelected == i + 1
                     ?
-                    'border-sky-400 dark:bg-slate-50 dark:text-black bg-slate-200'
+                    'border-sky-400 dark:bg-slate-50 dark:text-white bg-slate-200'
                     :
                     ''"
                 type="button"
