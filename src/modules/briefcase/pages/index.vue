@@ -1,7 +1,7 @@
 <template>
     <section class="flex flex-col h-screen">
-        <encabezado :firs-go="refMain" />
-        <main class="overflow-auto scroll-smooth">
+        <encabezado :firs-go="refMain?.expLaboral" />
+        <main class="overflow-auto scroll-smooth" @scroll="verifyHeight" style="height: calc(100vh - 84px);">
             <informationMain ref="refMain" />
         </main>
     </section>
@@ -13,6 +13,18 @@ import encabezado from '../partials/header.vue';
 import informationMain from '../partials/informationMain.vue';
 
 const refMain = ref()
-console.log('Informacion', refMain.value.laboral());
+
+function getHeight(el){
+    let rect = getBoundingClientRect()
+    let seeHeight = (
+        rect.top >= 0,
+        
+    )
+}
+
+function verifyHeight(dataHeight){
+    const seeContainer = refMain.value.contentDetect
+}
+
 
 </script>

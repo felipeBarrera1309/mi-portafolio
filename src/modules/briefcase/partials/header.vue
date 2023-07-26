@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="flex justify-between w-full bg-lime-300/30 px-5 py-3 dark:bg-slate-500/30 fixed backdrop-blur-lg">
+        <nav class="flex justify-between w-full bg-sky-200 px-5 py-3 dark:bg-slate-500">
             <div class="h-[60px] w-[60px]">
                 <a href="#"><img :src="changeImageMode" alt="" class="min-h-full min-w-[60px]" width="60"></a>
             </div>
@@ -20,25 +20,25 @@
                 >
                     <li class="
                         transition-all ease-in-out duration-300
-                        underline-offset-4 hover:underline hover:text-sky-200"
+                        underline-offset-4 hover:underline hover:text-sky-600"
                     >
                         <a :href="`#${firsGo}`">Quién soy</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
-                        underline-offset-4 hover:underline hover:text-sky-200"
+                        underline-offset-4 hover:underline hover:text-sky-600"
                     >
                         <a href="">Experiencia</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
-                        underline-offset-4 hover:underline hover:text-sky-200"
+                        underline-offset-4 hover:underline hover:text-sky-600"
                     >
                         <a href="">Proyectos</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
-                        underline-offset-4 hover:underline hover:text-sky-200"
+                        underline-offset-4 hover:underline hover:text-sky-600"
                     >
                         <a href="">Contáctame</a>
                     </li>

@@ -8,7 +8,6 @@
             >
                 Hola soy
             </h1>
-            <p><a href="#exp-laboral" class="scroll-smooth">Gooooo</a></p>
             <p class="text-3xl text-slate-600 dark:text-slate-300 font-bold font-mono">Felipe Barrera</p>
             <p class="font-bold text-3xl text-slate-500 dark:text-slate-600">Developer FrontEnd de aplicaciones WEB.</p>
             <p class="mt-5 text-lg break-keep">
@@ -61,74 +60,76 @@
         </div>
         <div
             class="w-64 h-80 bg-cover m-auto
-                bg-[url('/public/generals/photo-felipe.jpg')]
+                bg-[url('/publi/generals/photo-felipe.jpg')]
                 rounded-lg lg:w-full lg:h-full lg:bg-center lg:bg-no-repeat lg:bg-[length:417px_440px]
             "
         />
     </section>
-    <h2
-        class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
-    >
-        Experiencia laboral
-    </h2>
-    <section
-        class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-28"
-        ref="jobSection"
-        :id="expLaboral"
-    >
-        <div class="flex flex-row gap-3 md:min-w-[150px] lg:flex-col lg:justify-between lg:w-[20%]">
-            <button
-                v-for="(boton, i) in buttonsInformation"
-                :key="i"
-                class="bg-white w-full px-4 py-1
-                    transition-action relative
-                    max-h-[45px]
-                    dark:bg-slate-700
-                    hover:bg-slate-200
-                    hover:dark:bg-slate-200
-                    hover:dark:text-black
-                    lg:h-full lg:text-left
-                "
-                :class="sectionSelected == i + 1
-                    ?
-                        `border-sky-400 dark:bg-slate-50 dark:text-white bg-slate-200 ${changeClass}`
-                    :
-                    ''"
-                type="button"
-                @click="selectView(i + 1)"
-            >
-                {{ boton.name }}
-            </button>
-        </div>
-        <div class="my-10 flex lg:my-0 lg:px-10 lg:w-[850px]">
-            <template v-for="(data, i) in personalInformation" :key="i">
-                <article class="open-description text-ellipsis will-change-auto" v-if="sectionSelected == i + 1">
-                    <h3>{{ data.title }} <span class="text-sky-500 font-bold text-lg">{{ data.canal }}</span></h3>
-                    <h4 class="text-sm pb-5">{{ data.subtitle }}</h4>
-                    <ul class="flex flex-col gap-3">
-                        <li class="flex items-center gap-3">
-                            <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
-                            <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
-                                {{ data.descriptionOne }}
-                            </p>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
-                            <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
-                                {{ data.descriptionTwo }}
-                            </p>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
-                            <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
-                                {{ data.descriptionThree }}
-                            </p>
-                        </li>
-                    </ul>
-                </article>
-            </template>
-        </div>
-    </section>
+    <div class="flex flex-col" ref="contentDetect">
+        <h2
+            class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
+            :id="expLaboral"
+        >
+            Experiencia laboral
+        </h2>
+        <section
+            class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-28"
+            ref="jobSection"
+        >
+            <div class="flex flex-row gap-3 md:min-w-[150px] lg:flex-col lg:justify-between lg:w-[20%]">
+                <button
+                    v-for="(boton, i) in buttonsInformation"
+                    :key="i"
+                    class="bg-white w-full px-4 py-1
+                        transition-action relative
+                        max-h-[45px]
+                        dark:bg-slate-700
+                        hover:bg-slate-200
+                        hover:dark:bg-slate-200
+                        hover:dark:text-black
+                        lg:h-full lg:text-left
+                    "
+                    :class="sectionSelected == i + 1
+                        ?
+                            `border-sky-400 dark:bg-slate-50 dark:text-white bg-slate-200 ${changeClass}`
+                        :
+                        ''"
+                    type="button"
+                    @click="selectView(i + 1)"
+                >
+                    {{ boton.name }}
+                </button>
+            </div>
+            <div class="my-10 flex lg:my-0 lg:px-10 lg:w-[850px]">
+                <template v-for="(data, i) in personalInformation" :key="i">
+                    <article class="open-description text-ellipsis will-change-auto" v-if="sectionSelected == i + 1">
+                        <h3>{{ data.title }} <span class="text-sky-500 font-bold text-lg">{{ data.canal }}</span></h3>
+                        <h4 class="text-sm pb-5">{{ data.subtitle }}</h4>
+                        <ul class="flex flex-col gap-3">
+                            <li class="flex items-center gap-3">
+                                <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
+                                <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
+                                    {{ data.descriptionOne }}
+                                </p>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
+                                <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
+                                    {{ data.descriptionTwo }}
+                                </p>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-sky-500 font-black pointer-events-none">&#9655</span>
+                                <p class="px-5 font-normal text-stone-900 dark:text-cyan-50">
+                                    {{ data.descriptionThree }}
+                                </p>
+                            </li>
+                        </ul>
+                    </article>
+                </template>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script setup>
@@ -137,7 +138,8 @@ import { ref, onBeforeMount } from 'vue';
 const jobSection = ref()
 const sectionSelected = ref(1)
 const changeClass = ref('')
-const expLaboral = 'ex-laboral'
+const expLaboral = ref('ex-laboral')
+const contentDetect = ref()
 
 const buttonsInformation = ref([
     { name: 'experience' },
@@ -192,12 +194,9 @@ function selectView(selected){
     sectionSelected.value = selected
 }
 
-function laboral(){
-    return expLaboral
-}
-
 defineExpose({
-    laboral
+    expLaboral,
+    contentDetect
 })
 
 </script>
@@ -239,7 +238,7 @@ defineExpose({
         width: 100%;
         animation: open;
         animation-timing-function: linear;
-        animation-duration: 1s;
+        animation-duration: 0.8s;
         animation-iteration-count: 1;
         transition: all 0.3s ease-in-out;
     }
