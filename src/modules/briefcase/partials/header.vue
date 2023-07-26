@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="flex justify-between px-5 py-3 dark:bg-slate-500">
+        <nav class="flex justify-between w-full bg-lime-300/30 px-5 py-3 dark:bg-slate-500/30 fixed backdrop-blur-lg">
             <div class="h-[60px] w-[60px]">
                 <a href="#"><img :src="changeImageMode" alt="" class="min-h-full min-w-[60px]" width="60"></a>
             </div>
@@ -22,7 +22,7 @@
                         transition-all ease-in-out duration-300
                         underline-offset-4 hover:underline hover:text-sky-200"
                     >
-                        <a href="">Quién soy</a>
+                        <a :href="`#${firsGo}`">Quién soy</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
@@ -61,6 +61,13 @@ import { ref, onBeforeMount } from 'vue';
 const menu = ref()
 const openMenu = ref()
 const changeImageMode = ref('')
+
+const props = defineProps({
+    firsGo: {
+        type: String,
+        default: ''
+    }
+})
 
 onBeforeMount(() => {
     isModeDark()

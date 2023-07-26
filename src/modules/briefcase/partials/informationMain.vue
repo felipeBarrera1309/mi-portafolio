@@ -8,6 +8,7 @@
             >
                 Hola soy
             </h1>
+            <p><a href="#exp-laboral" class="scroll-smooth">Gooooo</a></p>
             <p class="text-3xl text-slate-600 dark:text-slate-300 font-bold font-mono">Felipe Barrera</p>
             <p class="font-bold text-3xl text-slate-500 dark:text-slate-600">Developer FrontEnd de aplicaciones WEB.</p>
             <p class="mt-5 text-lg break-keep">
@@ -60,7 +61,7 @@
         </div>
         <div
             class="w-64 h-80 bg-cover m-auto
-                bg-[url('/publi/generals/photo-felipe.jpg')]
+                bg-[url('/public/generals/photo-felipe.jpg')]
                 rounded-lg lg:w-full lg:h-full lg:bg-center lg:bg-no-repeat lg:bg-[length:417px_440px]
             "
         />
@@ -71,26 +72,26 @@
         Experiencia laboral
     </h2>
     <section
-        class="my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-28"
+        class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-28"
         ref="jobSection"
+        :id="expLaboral"
     >
         <div class="flex flex-row gap-3 md:min-w-[150px] lg:flex-col lg:justify-between lg:w-[20%]">
             <button
                 v-for="(boton, i) in buttonsInformation"
                 :key="i"
                 class="bg-white w-full px-4 py-1
-                    border-b-2 border-l-0 transition-action
-                    min-h-[45px]
+                    transition-action relative
+                    max-h-[45px]
                     dark:bg-slate-700
                     hover:bg-slate-200
                     hover:dark:bg-slate-200
                     hover:dark:text-black
-                    lg:border-b-0 lg:border-l-2 lg:max-h-[56px]
                     lg:h-full lg:text-left
                 "
                 :class="sectionSelected == i + 1
                     ?
-                    'border-sky-400 dark:bg-slate-50 dark:text-white bg-slate-200'
+                        `border-sky-400 dark:bg-slate-50 dark:text-white bg-slate-200 ${changeClass}`
                     :
                     ''"
                 type="button"
@@ -101,7 +102,7 @@
         </div>
         <div class="my-10 flex lg:my-0 lg:px-10 lg:w-[850px]">
             <template v-for="(data, i) in personalInformation" :key="i">
-                <article class="open-description text-ellipsis" v-if="sectionSelected == i + 1">
+                <article class="open-description text-ellipsis will-change-auto" v-if="sectionSelected == i + 1">
                     <h3>{{ data.title }} <span class="text-sky-500 font-bold text-lg">{{ data.canal }}</span></h3>
                     <h4 class="text-sm pb-5">{{ data.subtitle }}</h4>
                     <ul class="flex flex-col gap-3">
@@ -131,10 +132,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 
 const jobSection = ref()
 const sectionSelected = ref(1)
+const changeClass = ref('')
+const expLaboral = 'ex-laboral'
 
 const buttonsInformation = ref([
     { name: 'experience' },
@@ -169,21 +172,96 @@ const personalInformation = ref([
     },
 ])
 
+onBeforeMount(() => {
+    verifySizeWindow(window.innerWidth)
+})
+
+function verifySizeWindow(size){
+    if(size > 1024){
+        changeClass.value = 'back-line-lg'
+    }else{
+        changeClass.value = 'back-line-md'
+    }
+}
+
+window.addEventListener('resize', (value) => {
+    verifySizeWindow(value.target.innerWidth)
+})
+
 function selectView(selected){
     sectionSelected.value = selected
 }
+
+function laboral(){
+    return expLaboral
+}
+
+defineExpose({
+    laboral
+})
 
 </script>
 
 <style lang="scss" scoped>
 
-.open-description{
-    width: 100%;
-    animation: open;
-    animation-timing-function: linear;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-    transition: all 0.3s ease-in-out;
+.parent-section{
+    .back-line-lg{
+        &::before{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 0;
+            border-radius: 10px;
+            left: 0;
+            bottom: 0;
+            background-color: rgb(89, 89, 227);
+            animation: moveLineVertical linear 1 0.3s;
+            animation-fill-mode: forwards;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+    .back-line-md{
+        &::before{
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            border-radius: 10px;
+            left: 0;
+            bottom: 0;
+            background-color: rgb(89, 89, 227);
+            animation: moveLineHorizontal linear 1 0.3s;
+            animation-fill-mode: forwards;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+    .open-description{
+        width: 100%;
+        animation: open;
+        animation-timing-function: linear;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+@keyframes moveLineHorizontal {
+    from{
+        width: 0;
+        left: 50%;
+    }to{
+        width: 100%;
+    }
+}
+
+@keyframes moveLineVertical{
+    0%{
+        height: 0;
+        bottom: 50%;
+    }
+    100%{
+        height: 100%;
+    }
 }
 
 @keyframes open{

@@ -1,15 +1,18 @@
 <template>
     <section class="flex flex-col h-screen">
-        <encabezado />
-        <main class="overflow-auto m-1" style="height: calc(100vh - 84px);">
-            <informationMain />
+        <encabezado :firs-go="refMain" />
+        <main class="overflow-auto scroll-smooth">
+            <informationMain ref="refMain" />
         </main>
     </section>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import encabezado from '../partials/header.vue';
 import informationMain from '../partials/informationMain.vue';
 
+const refMain = ref()
+console.log('Informacion', refMain.value.laboral());
 
 </script>
