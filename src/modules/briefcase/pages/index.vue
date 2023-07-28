@@ -15,15 +15,18 @@ import informationMain from '../partials/informationMain.vue';
 const refMain = ref()
 const refScroll = ref()
 
-function getHeight(el){
-    const rect = el.getBoundingClientRect()
-    return (
-        rect.top >= 0 &&
-        rect.top <= (window.innerHeight ) ||
-        rect.bottom <= (window.innerHeight) &&
-        rect.bottom >= 0
-    )
-}
+// function getHeight(el){
+//     const rect = el.getBoundingClientRect()
+//     return (
+//         rect.top >= 0 &&
+//         rect.top <= (window.innerHeight ) ||
+//         rect.bottom <= (window.innerHeight) &&
+//         rect.bottom >= 0
+//     )
+// }
+
+// NOTA IMPORTANTE: la funcion de arriba verifica si el contenedor entra en pantalla,
+// Hacerla luego en casa desde cero
 
 function verifyHeight(){
     const seeContainer = refMain.value.contentDetect
