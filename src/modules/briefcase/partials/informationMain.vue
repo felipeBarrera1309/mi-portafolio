@@ -65,7 +65,7 @@
             "
         />
     </section>
-    <div class="flex flex-col" ref="contentDetect">
+    <div class="flex flex-col mb-96 mt-52" ref="contentDetect" style="border: 8px solid red;">
         <h2
             class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
             :id="expLaboral"
@@ -129,6 +129,9 @@
                 </template>
             </div>
         </section>
+    </div>
+    <div class="h-96 mt-96">
+        <p class="py-96">algo</p>
     </div>
 </template>
 

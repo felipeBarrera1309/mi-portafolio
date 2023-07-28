@@ -1,9 +1,9 @@
 <template>
     <section class="flex flex-col h-screen">
         <encabezado :firs-go="refMain?.expLaboral" />
-        <main class="overflow-auto scroll-smooth" @scroll="verifyHeight" style="height: calc(100vh - 84px);">
+        <el-scrollbar ref="refScroll" :min-size="100"  class="h-full" @scroll="verifyHeight" >
             <informationMain ref="refMain" />
-        </main>
+        </el-scrollbar>
     </section>
 </template>
 
@@ -13,17 +13,22 @@ import encabezado from '../partials/header.vue';
 import informationMain from '../partials/informationMain.vue';
 
 const refMain = ref()
+const refScroll = ref()
 
 function getHeight(el){
-    let rect = getBoundingClientRect()
-    let seeHeight = (
-        rect.top >= 0,
-        
+    const rect = el.getBoundingClientRect()
+    return (
+        rect.top >= 0 &&
+        rect.top <= (window.innerHeight ) ||
+        rect.bottom <= (window.innerHeight) &&
+        rect.bottom >= 0
     )
 }
 
-function verifyHeight(dataHeight){
+function verifyHeight(){
     const seeContainer = refMain.value.contentDetect
+    console.log('Esto es correcto apenas entra a la altura: ', getHeight(seeContainer));
+    // console.log("Este es el alto de la ventana: ", window.innerHeight);
 }
 
 

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.el-scrollbar__wrap {
+    scroll-behavior: smooth;
+}
 
 @layer utilities{
     .open-menu{
