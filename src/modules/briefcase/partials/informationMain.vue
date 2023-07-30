@@ -1,5 +1,5 @@
 <template>
-    <section class="my-0 flex flex-col lg:flex-row lg:h-[850px]">
+    <section class="my-0 flex flex-col lg:flex-row lg:h-[850px]" :id="whoIm">
         <div class="p-10 lg:w-4/5 lg:h-[500px] lg:self-center space-y-4">
             <h1
                 class="text-sky-600 text-2xl dark:text-sky-300
@@ -65,7 +65,7 @@
             "
         />
     </section>
-    <div class="flex flex-col mb-96 mt-52" ref="contentDetect" style="border: 8px solid red;">
+    <div class="flex flex-col" ref="contentDetect">
         <h2
             class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
             :id="expLaboral"
@@ -102,7 +102,10 @@
             </div>
             <div class="my-10 flex lg:my-0 lg:px-10 lg:w-[850px]">
                 <template v-for="(data, i) in personalInformation" :key="i">
-                    <article class="open-description text-ellipsis will-change-auto" v-if="sectionSelected == i + 1">
+                    <article
+                        :class="`text-ellipsis will-change-auto ${addClassDynamic}`"
+                        v-if="sectionSelected == i + 1"
+                    >
                         <h3>{{ data.title }} <span class="text-sky-500 font-bold text-lg">{{ data.canal }}</span></h3>
                         <h4 class="text-sm pb-5">{{ data.subtitle }}</h4>
                         <ul class="flex flex-col gap-3">
@@ -130,8 +133,13 @@
             </div>
         </section>
     </div>
-    <div class="h-96 mt-96">
-        <p class="py-96">algo</p>
+    <div class="">
+        <h4
+            class="text-3xl text-slate-700 dark:text-white px-12 my-5
+            font-bold tracking-widest md:text-center"
+        >
+            Mis últimos proyectos
+        </h4>
     </div>
 </template>
 
@@ -141,8 +149,10 @@ import { ref, onBeforeMount } from 'vue';
 const jobSection = ref()
 const sectionSelected = ref(1)
 const changeClass = ref('')
-const expLaboral = ref('ex-laboral')
+const expLaboral = 'ex-laboral'
+const whoIm = 'whoIm'
 const contentDetect = ref()
+const addClassDynamic = ref('')
 
 const buttonsInformation = ref([
     { name: 'experience' },
@@ -181,12 +191,11 @@ onBeforeMount(() => {
     verifySizeWindow(window.innerWidth)
 })
 
-function verifySizeWindow(size){
-    if(size > 1024){
+function verifySizeWindow(size, verify){
+    size > 1024 ?
         changeClass.value = 'back-line-lg'
-    }else{
+        :
         changeClass.value = 'back-line-md'
-    }
 }
 
 window.addEventListener('resize', (value) => {
@@ -197,9 +206,19 @@ function selectView(selected){
     sectionSelected.value = selected
 }
 
+function addClassArticle(addClass, verify){
+    if(verify){
+        addClassDynamic.value = addClass
+    }else{
+        addClassDynamic.value = ''
+    }
+}
+
 defineExpose({
     expLaboral,
-    contentDetect
+    contentDetect,
+    addClassArticle,
+    whoIm
 })
 
 </script>
@@ -217,9 +236,9 @@ defineExpose({
             left: 0;
             bottom: 0;
             background-color: rgb(89, 89, 227);
-            animation: moveLineVertical linear 1 0.3s;
+            animation: moveLineVertical linear 1 0.4s;
             animation-fill-mode: forwards;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s ease-in-out;
         }
     }
     .back-line-md{
@@ -232,9 +251,9 @@ defineExpose({
             left: 0;
             bottom: 0;
             background-color: rgb(89, 89, 227);
-            animation: moveLineHorizontal linear 1 0.3s;
+            animation: moveLineHorizontal linear 1 0.4s;
             animation-fill-mode: forwards;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s ease-in-out;
         }
     }
     .open-description{

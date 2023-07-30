@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="">
         <nav class="flex justify-between w-full bg-sky-200 px-5 py-3 dark:bg-slate-500">
             <div class="h-[60px] w-[60px]">
                 <a href="#"><img :src="changeImageMode" alt="" class="min-h-full min-w-[60px]" width="60"></a>
@@ -22,13 +22,13 @@
                         transition-all ease-in-out duration-300
                         underline-offset-4 hover:underline hover:text-sky-600"
                     >
-                        <a :href="`#${firsGo}`">Quién soy</a>
+                        <a :href="`#${firstGo}`">Quién soy</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
                         underline-offset-4 hover:underline hover:text-sky-600"
                     >
-                        <a href="">Experiencia</a>
+                        <a :href="`#${secondGo}`">Experiencia</a>
                     </li>
                     <li class="
                         transition-all ease-in-out duration-300
@@ -63,7 +63,11 @@ const openMenu = ref()
 const changeImageMode = ref('')
 
 const props = defineProps({
-    firsGo: {
+    firstGo: {
+        type: String,
+        default: ''
+    },
+    secondGo: {
         type: String,
         default: ''
     }
