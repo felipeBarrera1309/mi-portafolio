@@ -5,6 +5,9 @@
 .el-scrollbar__wrap {
     scroll-behavior: smooth;
 }
+.el-scrollbar__wrap .horizontal{
+    display: flex;
+}
 
 @layer utilities{
     .open-menu{

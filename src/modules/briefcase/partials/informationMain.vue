@@ -1,6 +1,9 @@
 <template>
-    <section class="my-0 flex flex-col lg:flex-row lg:h-[850px]" :id="whoIm">
-        <div class="p-10 lg:w-4/5 lg:h-[500px] lg:self-center space-y-4">
+    <section class="my-0 pb-8 flex flex-col lg:flex-row lg:h-[850px]" :id="redirectHead">
+        <div
+            class="p-10 lg:w-4/5 lg:h-[500px] lg:self-center space-y-4"
+            ref="whoIm"
+        >
             <h1
                 class="text-sky-600 text-2xl dark:text-sky-300
                     uppercase font-bold tracking-widest leading-10
@@ -65,7 +68,7 @@
             "
         />
     </section>
-    <div class="flex flex-col" ref="contentDetect">
+    <div class="flex flex-col mt-16 lg:mt-5" ref="contentDetect">
         <h2
             class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
             :id="expLaboral"
@@ -133,13 +136,35 @@
             </div>
         </section>
     </div>
-    <div class="">
+    <div class="mx-10">
         <h4
             class="text-3xl text-slate-700 dark:text-white px-12 my-5
             font-bold tracking-widest md:text-center"
         >
             Mis últimos proyectos
         </h4>
+        <el-scrollbar class="my-10 pb-5">
+            <section class="flex flex-col items-center lg:flex-row gap-5">
+                <div
+                    v-for="project in projects"
+                    class="group flex flex-col gap-2 max-w-[280px]"
+                >
+                    <img :src="project.img" alt="" class="transition-action w-full h-[150px] object-contain opacity-50 group-hover:opacity-100" />
+                    <p class="font-bold uppercase">{{ project.description }}</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs rounded-2xl bg-slate-500/50 flex items-center px-1">{{ project.contentOne }}</span>
+                        <span class="text-xs rounded-2xl bg-slate-500/50 flex items-center px-1">{{ project.contentTwo }}</span>
+                        <span class="text-xs rounded-2xl bg-slate-500/50 flex items-center px-1">{{ project.contentThree }}</span>
+                        <a :href="project.urlGitHub" class="ms-auto">
+                            <i class="icon-github transition-action text-xl hover:text-lime-500 dark:hover:text-slate-500" />
+                        </a>
+                        <a :href="project.viewPage">
+                            <i class="icon-eye transition-action text-xl hover:text-lime-500 dark:hover:text-slate-500" />
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </el-scrollbar>
     </div>
 </template>
 
@@ -150,7 +175,8 @@ const jobSection = ref()
 const sectionSelected = ref(1)
 const changeClass = ref('')
 const expLaboral = 'ex-laboral'
-const whoIm = 'whoIm'
+const whoIm = ref()
+const redirectHead = 'whoIm'
 const contentDetect = ref()
 const addClassDynamic = ref('')
 
@@ -159,6 +185,11 @@ const buttonsInformation = ref([
     { name: 'experience' },
     { name: 'experience' },
 ])
+
+onBeforeMount(() => {
+    verifySizeWindow(window.innerWidth)
+})
+
 
 const personalInformation = ref([
     {
@@ -187,11 +218,28 @@ const personalInformation = ref([
     },
 ])
 
-onBeforeMount(() => {
-    verifySizeWindow(window.innerWidth)
-})
+const projects = ref([
+    {
+        img: '/public/generals/project-cats.png',
+        description: 'escoger gatos randoms',
+        contentOne: 'HTML',
+        contentTwo: 'CSS',
+        contentThree: 'JavaScript',
+        urlGitHub: 'https://github.com/felipeBarrera1309/Randoms-cats',
+        viewPage: 'https://felipebarrera1309.github.io/Randoms-cats/'
+    },
+    {
+        img: '/public/generals/aplication-movile.png',
+        description: 'Aplicacion movil para ingresos y egresos',
+        contentOne: 'HTML-CSS',
+        contentTwo: 'JS',
+        contentThree: 'Vue',
+        urlGitHub: 'https://github.com/felipeBarrera1309/vue-practica-movile',
+        viewPage: 'https://aplication-movile-with-web.netlify.app/'
+    },
+])
 
-function verifySizeWindow(size, verify){
+function verifySizeWindow(size){
     size > 1024 ?
         changeClass.value = 'back-line-lg'
         :
@@ -218,7 +266,8 @@ defineExpose({
     expLaboral,
     contentDetect,
     addClassArticle,
-    whoIm
+    whoIm,
+    redirectHead
 })
 
 </script>
