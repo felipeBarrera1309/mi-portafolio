@@ -10,11 +10,6 @@
 }
 
 @layer utilities{
-    .open-menu{
-        height: 220px;
-        opacity: 1;
-        display: block;
-    }
     .transition-action{
         @apply transition-all ease-out duration-300;
     }

@@ -3,6 +3,8 @@
         <encabezado
             :secondGo="refMain?.expLaboral"
             :firstGo="refMain?.redirectHead"
+            :third-go="refMain?.redirectProjects"
+            class="mb-6"
             ref="refHead"
         />
         <el-scrollbar ref="refScroll" :min-size="100"  class="h-full" @scroll="verifyHeight" >
@@ -48,15 +50,22 @@ function verifyHeightInWindow(cont){
 function verifyHeight(){
     const seeContainer = refMain.value?.contentDetect
     const seeWhoIm = refMain.value?.whoIm
-    // Marcar el encabezado de los enlaces como marcados cuando el contenedor pase por
-    // la ventana del navegador
-    const verifyExperience = verifyHeightInWindow(seeContainer)
-    const verifyWhoIm = verifyHeightInWindow(seeWhoIm)
+    const lastProjects = refMain.value?.refProjects
+    refMain.value.addClassProjects(getFullHeight(lastProjects))
+
+    let verifyWhoIm = false
+    const verifyExperience = getFullHeight(seeContainer)
+    const verifyProjects = getFullHeight(lastProjects)
+    if(window.innerWidth > 1024){
+        verifyWhoIm = verifyHeightInWindow(seeWhoIm)
+    }else{
+        verifyWhoIm = getFullHeight(seeWhoIm)
+    }
     refHead.value?.changeSelected(
         {
             first: verifyWhoIm,
             second: verifyExperience,
-            third: false,
+            third: verifyProjects,
             fourth: false
         }
     )

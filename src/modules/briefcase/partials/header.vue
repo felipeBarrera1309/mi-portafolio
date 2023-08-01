@@ -11,10 +11,9 @@
                 "
                 ref="menu"
             >
-            <div class="flex flex-col items-center md:flex-row">
+            <div class="toggle-menu flex flex-col items-center justify-center md:flex-row">
                 <ul
-                    class="
-                        flex flex-col gap-3 w-full items-center
+                    class="flex flex-col gap-3 w-full items-center
                         md:flex-row md:justify-center dark:text-cyan-50
                     "
                 >
@@ -37,7 +36,7 @@
                         ${ isWindow.third ? 'underline text-sky-600 dark:text-sky-900' : 'no-underline text-slate-900 dark:text-white' }`
                         "
                     >
-                        <a href="">Proyectos</a>
+                        <a :href="`#${thirdGo}`">Proyectos</a>
                     </li>
                     <li
                         :class="`transition-all ease-in-out duration-300 underline-offset-4 hover:underline hover:text-sky-600
@@ -73,15 +72,15 @@ const isWindow = ref({
 })
 
 const props = defineProps({
-    modelValue: {
-        type: Boolean,
-        required: true
-    },
     firstGo: {
         type: String,
         default: ''
     },
     secondGo: {
+        type: String,
+        default: ''
+    },
+    thirdGo: {
         type: String,
         default: ''
     }
@@ -141,7 +140,39 @@ defineExpose({
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.open-menu{
+    height: 220px;
+    opacity: 1;
+    display: block;
+    opacity: 1;
+    animation: seeMenu;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 0.4s;
+    .toggle-menu{
+        height: 100%;
+        animation: open;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 1;
+        animation-duration: 0.4s;
+    }
+}
+
+@keyframes open{
+    from{
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes seeMenu{
+    0%{
+        height: 0px;
+        opacity: 0;
+    }
+}
 
 @media ( min-width: 768px ) {
     .openMenu{

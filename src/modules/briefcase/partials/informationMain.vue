@@ -68,7 +68,7 @@
             "
         />
     </section>
-    <div class="flex flex-col mt-16 lg:mt-5" ref="contentDetect">
+    <div class="flex flex-col mt-10">
         <h2
             class="text-3xl w-4/5 mx-auto text-center text-slate-700 dark:text-white font-bold my-8 tracking-widest lg:my-0"
             :id="expLaboral"
@@ -76,8 +76,8 @@
             Experiencia laboral
         </h2>
         <section
-            class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-28"
-            ref="jobSection"
+            class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-16"
+            ref="contentDetect"
         >
             <div class="flex flex-row gap-3 md:min-w-[150px] lg:flex-col lg:justify-between lg:w-[20%]">
                 <button
@@ -138,16 +138,16 @@
     </div>
     <div class="mx-10">
         <h4
-            class="text-3xl text-slate-700 dark:text-white px-12 my-5
+            class="text-3xl text-slate-700 dark:text-white px-12 py-16
             font-bold tracking-widest md:text-center"
         >
             Mis últimos proyectos
         </h4>
         <el-scrollbar class="my-10 pb-5">
-            <section class="flex flex-col items-center lg:flex-row gap-5">
+            <section class="flex flex-col items-center lg:flex-row gap-5" ref="refProjects" :id="redirectProjects">
                 <div
                     v-for="project in projects"
-                    class="group flex flex-col gap-2 max-w-[280px]"
+                    :class="`group flex flex-col gap-2 ${ addClassProjects ? 'move-box' : ''}`"
                 >
                     <img :src="project.img" alt="" class="transition-action w-full h-[150px] object-contain opacity-50 group-hover:opacity-100" />
                     <p class="font-bold uppercase">{{ project.description }}</p>
@@ -156,10 +156,10 @@
                         <span class="text-xs rounded-2xl bg-slate-500/50 flex items-center px-1">{{ project.contentTwo }}</span>
                         <span class="text-xs rounded-2xl bg-slate-500/50 flex items-center px-1">{{ project.contentThree }}</span>
                         <a :href="project.urlGitHub" class="ms-auto">
-                            <i class="icon-github transition-action text-xl hover:text-lime-500 dark:hover:text-slate-500" />
+                            <i class="icon-github transition-action text-xl hover:text-sky-600 dark:hover:text-slate-500" />
                         </a>
                         <a :href="project.viewPage">
-                            <i class="icon-eye transition-action text-xl hover:text-lime-500 dark:hover:text-slate-500" />
+                            <i class="icon-eye transition-action text-xl hover:text-sky-600 dark:hover:text-slate-500" />
                         </a>
                     </div>
                 </div>
@@ -171,12 +171,13 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 
-const jobSection = ref()
 const sectionSelected = ref(1)
 const changeClass = ref('')
 const expLaboral = 'ex-laboral'
 const whoIm = ref()
+const refProjects = ref()
 const redirectHead = 'whoIm'
+const redirectProjects = 'redirectProjects'
 const contentDetect = ref()
 const addClassDynamic = ref('')
 
@@ -262,12 +263,19 @@ function addClassArticle(addClass, verify){
     }
 }
 
+function addClassProjects(valueBoolean){
+    valueBoolean ? refProjects.value.classList.add('move-box') : refProjects.value.classList.remove('move-box')
+}
+
 defineExpose({
     expLaboral,
     contentDetect,
     addClassArticle,
     whoIm,
-    redirectHead
+    redirectHead,
+    refProjects,
+    addClassProjects,
+    redirectProjects
 })
 
 </script>
@@ -312,6 +320,20 @@ defineExpose({
         animation-duration: 0.8s;
         animation-iteration-count: 1;
         transition: all 0.3s ease-in-out;
+    }
+}
+
+.move-box{
+    animation: upload;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes upload{
+    from{
+        transform: translateY(80px);
+        opacity: 0;
     }
 }
 
