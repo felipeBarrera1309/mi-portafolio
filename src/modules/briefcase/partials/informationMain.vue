@@ -167,7 +167,16 @@
         </el-scrollbar>
     </div>
     <div class="w-[90%] flex flex-col mx-auto">
-        <echarts :option="getOptions" />
+        <echarts :option="getOptions" class="h-[300px]" />
+    </div>
+    <div class="w-[90%] flex flex-col mx-auto">
+        <echarts :option="getOptionsTwo" class="h-[300px]" />
+    </div>
+    <div class="w-[90%] flex flex-col mx-auto">
+        <echarts :option="getOptionsBar" class="h-[300px]" />
+    </div>
+    <div class="w-[90%] flex flex-col mx-auto">
+        <echarts :option="getOptionsPie" class="h-[300px]" />
     </div>
 </template>
 
@@ -197,60 +206,215 @@ onBeforeMount(() => {
 
 const getOptions = ref({
     legend: {
-        data: [
-            {
-                name: 'algo'
-            }
-        ]
+        data: ['mounths', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
     },
-    title: {
+    tooltip: {
         show: true,
-        text: 'titulo de mi grafica',
-        right: 'center',
-        textStyle: {
-            fontSize: 30
-        }
+        trigger: 'axis',
+        triggerOn: 'mousemove|click',
     },
-    xAxis: {
-        type: 'category',
-        data: [ 'Lun', 'Mart', 'Mier', 'Juev', 'Viern', 'Sab', 'Dom' ],
-        axisLine: {
-            show: true,
-            onZero: true,
-            onZeroAxisIndex: 0,
-            symbol: 'none',
-            lineStyle: {
-                color: 'red',
-                width: 1,
-                type: 'dotted',
-                dashOffset: 5,
-                cap: 'square',
-                shadowColor: 'rgba(0, 0, 0, 0.5)',
-                shadowBlur: 10,
-                shadowOffsetX: 5,
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: [ 'Lun', 'Mart', 'Mier', 'Juev', 'Viern', 'Sab', 'Dom' ],
+            axisLine: {
+                show: true,
+                onZero: true,
+                onZeroAxisIndex: 0,
+                symbol: 'none',
+                lineStyle: {
+                    color: 'red',
+                    width: 1,
+                    type: 'dotted',
+                    dashOffset: 5,
+                    cap: 'square',
+                    shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    shadowBlur: 10,
+                    shadowOffsetX: 5,
+                },
             },
-        },
-        axisTick: {
-            show: true,
-            alignWithLabel : true,
-            inside: true
+            axisTick: {
+                show: true,
+                alignWithLabel : true,
+                inside: true
+            }
         }
-    },
+    ],
     yAxis: [
         {
             type: 'value'
         },
         {
             type: 'value',
-            position: 'right',
             min: 0,
-            max: 50
+            max: 50,
+            position: 'right'
         }
     ],
-    series: {
-        data: [ 56, 108, 200, 80, 87, 250, 0 ],
-        type: 'line',
-    }
+    series: [
+        {
+            name: 'mounths',
+            data: [ 56, 108, 200, 80, 87, 250, 0 ],
+            type: 'line',
+        }
+    ]
+})
+
+const getOptionsTwo = ref(
+    {
+        title: {
+        text: 'Stacked Line'
+    },
+    tooltip: {
+        show: true,
+        trigger: 'axis',
+    },
+    legend: {
+        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: true,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: 'Email',
+            type: 'line',
+            stack: 'Total',
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: 'Union Ads',
+            type: 'line',
+            stack: 'Total',
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: 'Video Ads',
+            type: 'bar',
+            data: [300, 232, 1000, 800, 190, 2000, 410]
+        },
+        {
+            name: 'Direct',
+            type: 'line',
+            stack: 'Total',
+            data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name: 'Search Engine',
+            type: 'line',
+            stack: 'Total',
+            itemStyle: {
+                color: 'red',
+                borderWidth: 10,
+            },
+            lineStyle: {
+                color: 'blue'
+            },
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+}
+)
+
+const getOptionsBar = ref({
+    legend: {
+        show: true,
+        data: ['ventas', 'gastos', 'Ranking'],
+        textStyle: {
+            rich: {
+                icon:{
+                    width: 20,
+                    height: 20,
+                    backgroundColor: {
+                        image: 'url()'
+                    }
+                }
+            }
+        }
+    },
+    tooltip: {
+        show: true,
+        trigger: 'axis',
+        axisPointer:{
+            type: 'shadow'
+        }
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ],
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            type: 'bar',
+            name: 'ventas',
+            data: [5, 70, 230, 380, 180, 30, 290]
+        },
+        {
+            type: 'bar',
+            name: 'gastos',
+            data: [5, 70, 230, 380, 180, 30, 290]
+        },
+        {
+            type: 'line',
+            name: 'Ranking',
+            data: [5, 70, 230, 380, 180, 30, 290]
+        },
+    ]
+})
+
+const getOptionsPie = ref({
+    tooltip: {
+        show: true
+    },
+    legend: {
+        show: true
+    },
+    series: [
+        {
+            type: 'pie',
+            name: 'Data information',
+            radius: [ '50%', '75%' ],
+            center: [ '30%', '50%' ],
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center',
+                color: 'green'
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                { name: 'first value', value: 10, },
+                { name: 'second value', value: 10 },
+                { name: 'third value', value: 10 },
+            ]
+        }
+    ]
 })
 
 
@@ -303,6 +467,7 @@ const projects = ref([
 ])
 
 function verifySizeWindow(size){
+    console.log('esto ejecuta cuando cambia el size: ', document.querySelector('.echarts-legend'));
     size > 1024 ?
         changeClass.value = 'back-line-lg'
         :

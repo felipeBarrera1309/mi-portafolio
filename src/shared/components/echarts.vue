@@ -1,11 +1,11 @@
 <template>
     <div :class="`flex justify-center relative ${width, height}`">
-        <div ref="graphContent" class="w-full h-full relative" />
+        <div ref="graphContent" class="w-full h-full relative content-graphic" />
     </div>
 </template>
 
 <script setup>
-import { ref, toRefs, watch,  onBeforeMount } from 'vue';
+import { ref, toRefs, watch,  shallowRef, onBeforeMount } from 'vue';
 import * as echarts from 'echarts';
 
 const props = defineProps({
@@ -13,6 +13,11 @@ const props = defineProps({
         type: Object,
         required: true,
         default: () => {}
+    },
+    id: {
+        type: String,
+        default: 'Echarts',
+        required: false
     },
     width: {
         type: String,
@@ -29,7 +34,7 @@ const props = defineProps({
         default: true
     }
 })
-const instance = ref(echarts.Echarts)
+const instance = shallowRef(echarts.Echarts)
 
 const { option, init } = toRefs(props)
 
