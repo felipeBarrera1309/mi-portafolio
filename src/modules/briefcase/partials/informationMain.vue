@@ -166,10 +166,14 @@
             </section>
         </el-scrollbar>
     </div>
+    <div class="w-[90%] flex flex-col mx-auto">
+        <echarts :option="getOptions" />
+    </div>
 </template>
 
 <script setup>
 import { ref, onBeforeMount } from 'vue';
+import echarts from '../../../shared/components/echarts.vue';
 
 const sectionSelected = ref(1)
 const changeClass = ref('')
@@ -189,6 +193,64 @@ const buttonsInformation = ref([
 
 onBeforeMount(() => {
     verifySizeWindow(window.innerWidth)
+})
+
+const getOptions = ref({
+    legend: {
+        data: [
+            {
+                name: 'algo'
+            }
+        ]
+    },
+    title: {
+        show: true,
+        text: 'titulo de mi grafica',
+        right: 'center',
+        textStyle: {
+            fontSize: 30
+        }
+    },
+    xAxis: {
+        type: 'category',
+        data: [ 'Lun', 'Mart', 'Mier', 'Juev', 'Viern', 'Sab', 'Dom' ],
+        axisLine: {
+            show: true,
+            onZero: true,
+            onZeroAxisIndex: 0,
+            symbol: 'none',
+            lineStyle: {
+                color: 'red',
+                width: 1,
+                type: 'dotted',
+                dashOffset: 5,
+                cap: 'square',
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+                shadowBlur: 10,
+                shadowOffsetX: 5,
+            },
+        },
+        axisTick: {
+            show: true,
+            alignWithLabel : true,
+            inside: true
+        }
+    },
+    yAxis: [
+        {
+            type: 'value'
+        },
+        {
+            type: 'value',
+            position: 'right',
+            min: 0,
+            max: 50
+        }
+    ],
+    series: {
+        data: [ 56, 108, 200, 80, 87, 250, 0 ],
+        type: 'line',
+    }
 })
 
 
