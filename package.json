@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cropperjs": "^1.6.1",
     "echarts": "^5.4.3",
     "element-plus": "^2.3.8",
     "pinia": "^2.1.4",

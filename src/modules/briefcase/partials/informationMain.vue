@@ -76,7 +76,7 @@
             Experiencia laboral
         </h2>
         <section
-            class="parent-section my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-16"
+            class="parent-section bg-slate-600/40 my-12 flex gap-4 flex-col w-4/5 m-auto lg:flex-row lg:w-[87%] lg:my-16"
             ref="contentDetect"
         >
             <div class="flex flex-row gap-3 md:min-w-[150px] lg:flex-col lg:justify-between lg:w-[20%]">
@@ -169,11 +169,13 @@
     <div class="w-[90%] flex flex-col mx-auto">
         <echarts :option="getOptions" />
     </div>
+    <croppperjs />
 </template>
 
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import echarts from '../../../shared/components/echarts.vue';
+import croppperjs from '../components/croppperjs.vue';
 
 const sectionSelected = ref(1)
 const changeClass = ref('')
@@ -345,6 +347,7 @@ defineExpose({
 <style lang="scss" scoped>
 
 .parent-section{
+    
     .back-line-lg{
         &::before{
             content: '';
